@@ -1,6 +1,12 @@
 # electron jade
 This module is a simple protocol handler for [electron](https://github.com/atom/electron) which takes care of all URLs with `jade` scheme. It compiles `.jade` files on the fly and the rest of the requests are just handles as simple (local) file requests.
 
+# Installation
+
+```
+npm install electron-jade
+```
+
 # Usage
 Just initialize this module with desired options for [Jade](https://www.npmjs.com/package/jade) package after the main `BrowserWindow` is created:
 
