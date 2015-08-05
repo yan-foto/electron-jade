@@ -9,5 +9,8 @@
     "jade"
   ],
   "author": "Yan Foto <yan.foto@quaintous.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "jade": "^1.11.0"
+  }
 }
