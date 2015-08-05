@@ -1,0 +1,13 @@
+{
+  "name": "electron-jade",
+  "version": "0.0.1",
+  "description": "Simple electron module to render Jade template",
+  "main": "index.js",
+  "keywords": [
+    "electron",
+    "node",
+    "jade"
+  ],
+  "author": "Pouyan Fotouhi <pouyan@bigrep.com>",
+  "license": "MIT"
+}
