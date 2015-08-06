@@ -1,6 +1,7 @@
 # electron jade
 This module is a simple protocol handler for [electron](https://github.com/atom/electron) which takes care of all URLs with `jade` scheme. It compiles `.jade` files on the fly and the rest of the requests are just handles as simple (local) file requests.
 
+<a href="https://github.com/yan-foto/neutron"><img alt="Neutron Compatible" src="https://img.shields.io/badge/neutron-compatible-004455.svg"></a>
 # Installation
 
 ```
