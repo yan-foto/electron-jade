@@ -14,14 +14,13 @@ Just initialize this module with desired options for [Jade](https://www.npmjs.co
 'use strict';
 
 var app = require('app');
-var j = require('./util/jade-protocol.js');
+var j = require('./util/jade-protocol.js')({pretty: true});
 var BrowserWindow = require('browser-window');
 
 // Standard stuff
 
 app.on('ready', function () {
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
-  j(); // <-- IT SHOULD BE INITIATED AFTER BROWSERWINDOW IS CREATED
 
   mainWindow.loadUrl('jade://' + __dirname + '/index.jade');
   // the rest...
