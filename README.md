@@ -9,13 +9,14 @@ npm install electron-jade
 ```
 
 # Usage
-Just initialize this module with desired options for [Jade](https://www.npmjs.com/package/jade) package after the main `BrowserWindow` is created:
+Just initialize this module with desired options for [Jade](https://www.npmjs.com/package/jade) package and your locals:
 
 ```js
 'use strict';
 
 var app = require('app');
-var j = require('./util/jade-protocol.js')({pretty: true});
+var locals = {/* ...*/};
+var j = require('electron-jade')({pretty: true}, locals);
 var BrowserWindow = require('browser-window');
 
 // Standard stuff
