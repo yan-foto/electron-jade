@@ -1,5 +1,5 @@
 # electron jade
-This module is a simple protocol handler for [electron](https://github.com/atom/electron) which takes care of all URLs with `jade` scheme. It compiles `.jade` files on the fly and the rest of the requests are just handles as simple (local) file requests.
+This module is a simple `file` protocol interceptor for [electron](https://github.com/atom/electron) which compiles all (local) URLs to files with `.jade` extension (e.g `/home/electron-jade/index.jade`) on the fly.
 
 <a href="https://github.com/yan-foto/neutron"><img alt="Neutron Compatible" src="https://img.shields.io/badge/neutron-compatible-004455.svg"></a>
 # Installation
@@ -24,12 +24,10 @@ var BrowserWindow = require('browser-window');
 app.on('ready', function () {
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
 
-  mainWindow.loadUrl('jade://' + __dirname + '/index.jade');
+  mainWindow.loadUrl('file://' + __dirname + '/index.jade');
   // the rest...
 });
 ```
-
-**Disclaimer**: this module is in its very early stages and the logic is still not mature enough.
 
 # Even more!
 If you want to have least effort when developing electron packages, take a look at [neutron](https://github.com/yan-foto/neutron)!
