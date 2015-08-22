@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var jade = require('jade');
 var extend = require('util')._extend;
+var mime = require('mime');
 
 module.exports = function(jadeOptions, locals) {
   app.on('ready', function() {
@@ -29,16 +30,17 @@ module.exports = function(jadeOptions, locals) {
        callback(2);
       }
 
-      if (path.extname(file) === '.jade') {
+      var ext = path.extname(file);
+      if (ext === '.jade') {
         var compiled = jade.compileFile(file, jadeOptions)(locals);
 
         callback({data: new Buffer(compiled), mimeType:'text/html'});
       } else {
-        callback({data: new Buffer(content)});
+        callback({data: new Buffer(content), mimeType: mime.lookup(ext)});
       }
     }, function (error, scheme) {
       if (!error) {
-        console.log('jade interceptor registered successfully');
+        console.log('Jade interceptor registered successfully');
       } else {
         console.error('Jade interceptor failed:', error);
       }
