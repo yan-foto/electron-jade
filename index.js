@@ -8,7 +8,7 @@ module.exports = function(jadeOptions) {
     var protocol = require('protocol');
     var options = extend({}, jadeOptions || {});
 
-    protocol.interceptProtocol('file', function(request, callback) {
+    protocol.interceptProtocol('file', function(request) {
         if(request) {
           var file = request.url.substr(8);
           if(file.endsWith('.jade')) {
