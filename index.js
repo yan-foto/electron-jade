@@ -3,7 +3,7 @@ var path = require('path');
 var jade = require('jade');
 var extend = require('util')._extend;
 
-module.exports = function(jadeOptions) {
+module.exports = function(jadeOptions, locals) {
   app.on('ready', function() {
     var protocol = require('protocol');
     var options = extend({}, jadeOptions || {});
@@ -12,7 +12,7 @@ module.exports = function(jadeOptions) {
         if(request) {
           var file = request.url.substr(8);
           if(file.endsWith('.jade')) {
-            var compiled = jade.compileFile(file, jadeOptions)();
+            var compiled = jade.compileFile(file, jadeOptions)(locals);
 
             return new protocol.RequestStringJob({
               mimeType: 'text/html',
