@@ -40,8 +40,11 @@ module.exports = function(jadeOptions, locals) {
         return null;
       }
     }, function (error, scheme) {
-      if (!error)
+      if (!error) {
         console.log('jade interceptor registered successfully');
+      } else {
+        console.error('Error while bootstraping electron-jade', error);
+      }
     });
   });
 };
