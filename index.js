@@ -9,41 +9,38 @@ module.exports = function(jadeOptions, locals) {
     var protocol = require('protocol');
     var options = extend({}, jadeOptions || {});
 
-    protocol.interceptProtocol('file', function(request) {
+    protocol.interceptBufferProtocol('file', function(request, callback) {
       var file = request.url.substr(7);
+      var content = null;
 
       // See if file actually exists
       try {
-        fs.readFileSync(file, 'utf8');
+        content = fs.readFileSync(file, 'utf8');
       } catch (e) {
         // See here for error numbers:
         // https://code.google.com/p/chromium/codesearch#chromium/src/net/base/net_error_list.h
        if (e.code === 'ENOENT') {
          // NET_ERROR(FILE_NOT_FOUND, -6)
-         return new protocol.RequestErrorJob(6);
+         callback(6);
        }
 
        // All other possible errors return a generic failure
        // NET_ERROR(FAILED, -2)
-       return new protocol.RequestErrorJob(2);
+       callback(2);
       }
 
       if (path.extname(file) === '.jade') {
         var compiled = jade.compileFile(file, jadeOptions)(locals);
 
-        return new protocol.RequestStringJob({
-          mimeType: 'text/html',
-          data: compiled
-        });
+        callback({data: new Buffer(compiled), mimeType:'text/html'});
       } else {
-        // Use original handler
-        return null;
+        callback({data: new Buffer(content)});
       }
     }, function (error, scheme) {
       if (!error) {
         console.log('jade interceptor registered successfully');
       } else {
-        console.error('Error while bootstraping electron-jade', error);
+        console.error('Jade interceptor failed:', error);
       }
     });
   });
