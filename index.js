@@ -16,7 +16,7 @@ module.exports = function(jadeOptions, locals) {
 
       // See if file actually exists
       try {
-        content = fs.readFileSync(file, 'utf8');
+        content = fs.readFileSync(file);
       } catch (e) {
         // See here for error numbers:
         // https://code.google.com/p/chromium/codesearch#chromium/src/net/base/net_error_list.h
@@ -36,7 +36,7 @@ module.exports = function(jadeOptions, locals) {
 
         callback({data: new Buffer(compiled), mimeType:'text/html'});
       } else {
-        callback({data: new Buffer(content), mimeType: mime.lookup(ext)});
+        callback({data: content, mimeType: mime.lookup(ext)});
       }
     }, function (error, scheme) {
       if (!error) {

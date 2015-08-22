@@ -1,6 +1,4 @@
 # electron jade
-**NOTE: due to a change in electrons [`protocol` API](https://github.com/atom/electron/issues/2475) there has been some problems with loading binary files when this module is activated! We are working on it.**
-
 This module is a simple `file` protocol interceptor for [electron](https://github.com/atom/electron) which compiles all (local) URLs to files with `.jade` extension (e.g `/home/electron-jade/index.jade`) on the fly.
 
 <a href="https://github.com/yan-foto/neutron"><img alt="Neutron Compatible" src="https://img.shields.io/badge/neutron-compatible-004455.svg"></a>
