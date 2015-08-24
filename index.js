@@ -5,13 +5,26 @@ var jade = require('jade');
 var extend = require('util')._extend;
 var mime = require('mime');
 
+var getPath = function(url) {
+  var host = require('url').parse(url).host.trim();
+  var result = url.substr(7);
+
+  // Local files in windows start with slash if no host is given
+  // file:///c:/something.jade
+  if(process.platform === 'win32' && !host) {
+    result = result.substr(1);
+  }
+
+  return result;
+}
+
 module.exports = function(jadeOptions, locals) {
   app.on('ready', function() {
     var protocol = require('protocol');
     var options = extend({}, jadeOptions || {});
 
     protocol.interceptBufferProtocol('file', function(request, callback) {
-      var file = request.url.substr(7);
+      var file = getPath(request.url);
       var content = null;
 
       // See if file actually exists
