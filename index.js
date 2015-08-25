@@ -6,12 +6,12 @@ var extend = require('util')._extend;
 var mime = require('mime');
 
 var getPath = function(url) {
-  var host = require('url').parse(url).host.trim();
-  var result = url.substr(7);
+  var parsed = require('url').parse(url);
+  var result = parsed.pathname;
 
   // Local files in windows start with slash if no host is given
   // file:///c:/something.jade
-  if(process.platform === 'win32' && !host) {
+  if(process.platform === 'win32' && !parsed.host.trim()) {
     result = result.substr(1);
   }
 
