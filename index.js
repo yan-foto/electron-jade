@@ -30,26 +30,26 @@ module.exports = function(jadeOptions, locals) {
       // See if file actually exists
       try {
         content = fs.readFileSync(file);
+
+        var ext = path.extname(file);
+        if (ext === '.jade') {
+          var compiled = jade.compileFile(file, jadeOptions)(locals);
+
+          return callback({data: new Buffer(compiled), mimeType:'text/html'});
+        } else {
+          return callback({data: content, mimeType: mime.lookup(ext)});
+        }
       } catch (e) {
         // See here for error numbers:
         // https://code.google.com/p/chromium/codesearch#chromium/src/net/base/net_error_list.h
        if (e.code === 'ENOENT') {
          // NET_ERROR(FILE_NOT_FOUND, -6)
-         callback(6);
+         return callback(6);
        }
 
        // All other possible errors return a generic failure
        // NET_ERROR(FAILED, -2)
-       callback(2);
-      }
-
-      var ext = path.extname(file);
-      if (ext === '.jade') {
-        var compiled = jade.compileFile(file, jadeOptions)(locals);
-
-        callback({data: new Buffer(compiled), mimeType:'text/html'});
-      } else {
-        callback({data: content, mimeType: mime.lookup(ext)});
+       return callback(2);
       }
     }, function (error, scheme) {
       if (!error) {
