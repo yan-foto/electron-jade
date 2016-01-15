@@ -40,6 +40,7 @@ module.exports = function(jadeOptions, locals) {
           return callback({data: content, mimeType: mime.lookup(ext)});
         }
       } catch (e) {
+       console.error(e);  
         // See here for error numbers:
         // https://code.google.com/p/chromium/codesearch#chromium/src/net/base/net_error_list.h
        if (e.code === 'ENOENT') {
