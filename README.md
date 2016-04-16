@@ -1,3 +1,6 @@
+# --- NOTICE OF DEPRECATION --
+This package has been deprecated in favour of [electron-pug](https://www.npmjs.com/package/electron-pug) and is not maintained further.
+
 # electron jade
 This module is a simple `file` protocol interceptor for [electron](https://github.com/atom/electron) which compiles all (local) URLs to files with `.jade` extension (e.g `/home/electron-jade/index.jade`) on the fly.
 
